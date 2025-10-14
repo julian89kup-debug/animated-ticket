@@ -7,7 +7,7 @@
 <style>
 :root {
   --purple-height: 18vh;
-  --clock-font: 1.3rem; /* slightly larger date text */
+  --clock-font: 1.3rem;
   --button-font: 1rem;
   --date-banner-height: 46px;
   --ticket-width: min(430px, 97%);
@@ -60,7 +60,7 @@ body {
   height:48px; 
   position:relative; 
   overflow:hidden; 
-  font-size: 1.25rem; /* larger header text */
+  font-size: 1.25rem;
   letter-spacing: 0.5px;
 }
 
@@ -122,9 +122,10 @@ body {
   height:100%; 
 }
 
-.date-banner .green { background: green; flex: 1; }
-.date-banner .red { background: red; flex: 1; }
-.date-banner .blue { background: blue; flex: 1; }
+/* ✅ Updated pastel colors */
+.date-banner .green { background: #e0e2f1; flex: 1; }
+.date-banner .red { background: #dcc0cb; flex: 1; }
+.date-banner .blue { background: #faecd4; flex: 1; }
 
 .date-banner span {
   position: absolute;
@@ -132,11 +133,11 @@ body {
   color: #fff;
   font-weight: 900;
   font-size: var(--clock-font);
-  text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* ✅ shadow only on date text */
-  animation: move-across 1.6s linear infinite alternate; /* ✅ faster animation */
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  animation: move-across 1.6s linear infinite alternate;
 }
 
-/* ✅ Even, smooth animation */
+/* --- Even, smooth animation --- */
 @keyframes move-across {
   0% { left: 5%; transform: translateX(0); }                 
   50% { left: 50%; transform: translateX(-50%); }            
@@ -181,10 +182,7 @@ body {
   border-radius:9px;
   transition: color 0.3s;
 }
-
-.bottom-btn:hover { 
-  color:#c62828; 
-}
+.bottom-btn:hover { color:#c62828; }
 
 </style>
 </head>
@@ -197,7 +195,7 @@ body {
     </div>
 
     <div class="qr-code">
-      <canvas id="qrcode"></canvas>
+      <div id="qrcode"></div>
     </div>
 
     <div class="info">
@@ -236,47 +234,21 @@ function updateClock() {
 setInterval(updateClock,1000);
 updateClock();
 
-const IMAGE_WIDTH_SCALE = 0.25;   
-const IMAGE_HEIGHT_SCALE = 0.25;  
-
-function generateFullQR(text) {
-  const QR = new QRCode(document.createElement('div'), { text:text, width:250, height:250 });
-  const modules = QR._oQRCode.modules;
-  const size = modules.length;
-  const canvas = document.getElementById('qrcode');
-  const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  const cellW = canvas.width / size;
-  const cellH = canvas.height / size;
-
-  const reserveWidth = Math.floor(size * IMAGE_WIDTH_SCALE);
-  const reserveHeight = Math.floor(size * IMAGE_HEIGHT_SCALE);
-
-  const startRow = Math.floor((size - reserveHeight) / 2);
-  const endRow = startRow + reserveHeight;
-  const startCol = Math.floor((size - reserveWidth) / 2);
-  const endCol = startCol + reserveWidth;
-
-  for (let r = 0; r < size; r++) {
-    for (let c = 0; c < size; c++) {
-      if (r >= startRow && r < endRow && c >= startCol && c < endCol) continue;
-      if (Math.random() > 0.5) ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
-    }
-  }
-
-  const img = new Image();
-  img.src = "Images/IMG_4092.jpg";
-  img.onload = function () {
-    ctx.drawImage(img, startCol*cellW, startRow*cellH, reserveWidth*cellW, reserveHeight*cellH);
-  };
+function generateScannableQR(text) {
+  const container = document.getElementById('qrcode');
+  container.innerHTML = ''; 
+  new QRCode(container, {
+    text: text,
+    width: 250,
+    height: 250,
+    colorDark: "#000000",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
 }
-
-function updateQR() {
-  const now = new Date();
-  generateFullQR("Ticket-" + now.getTime());
-}
-setInterval(updateQR,2000);
-updateQR();
+setInterval(() => {
+  generateScannableQR("Ticket-" + Date.now());
+}, 2000);
 
 function closeTicket() {
   document.querySelector('.ticket').style.display = 'none';
@@ -284,4 +256,3 @@ function closeTicket() {
 </script>
 </body>
 </html>
-
