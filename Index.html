@@ -6,42 +6,61 @@
 <title>nBus Ticket Replica</title>
 <style>
 :root {
-  --purple-height: 15vh;
-  --clock-font: 1rem;
-  --button-width: 80%;
-  --button-height: 45px;
-  --button-font: 1rem;
-  --date-banner-height: 40px;
+  --purple-height: 10vh;
+  --clock-font: 0.9rem;
+  --button-font: 0.9rem;
+  --ticket-width: min(340px, 90%);
+  --date-banner-height: 35px;
 }
 
-/* ---------- Layout ---------- */
+/* ---------- Page Layout ---------- */
 body { 
   font-family: Arial, sans-serif; 
   margin:0; 
   padding:0; 
-  background:#f4f4f4; 
+  background:white; 
   display:flex; 
   justify-content:center; 
   align-items:center; 
   min-height:100vh; 
+  position:relative;
 }
 
+/* ---------- Ticket Card ---------- */
 .ticket { 
-  width: min(400px, 90%);
+  width: var(--ticket-width);
   background:#fff; 
   border-radius:10px; 
   box-shadow:0 4px 8px rgba(0,0,0,0.2); 
   overflow:hidden; 
   text-align:center; 
+  position:relative;
+  transform: scale(0.95);
 }
+
+/* ---------- Close Button ---------- */
+.close-btn {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  color: #333;
+  background: transparent;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.close-btn:hover { color: #c62828; }
 
 /* ---------- Header Banner ---------- */
 .header { 
   background:#c62828; 
   color:#fff; 
-  padding:10px; 
+  padding:8px; 
   font-weight:bold; 
-  height:35px; 
+  height:28px; 
   position:relative; 
   overflow:hidden; 
 }
@@ -58,13 +77,11 @@ body {
 }
 
 /* ---------- QR Code ---------- */
-.qr-code { 
-  padding:20px; 
-}
+.qr-code { padding:10px; }
 
 #qrcode { 
   width:100%; 
-  max-width:280px;
+  max-width:220px;
   aspect-ratio: 1 / 1;
   margin:auto; 
   display:block; 
@@ -72,10 +89,10 @@ body {
 
 /* ---------- Info Text ---------- */
 .info { 
-  padding:10px; 
+  padding:8px; 
   color:#555; 
-  line-height:1.3; 
-  font-size:1rem;
+  line-height:1.2; 
+  font-size:0.9rem;
 }
 
 /* ---------- Combined Banner Section ---------- */
@@ -121,7 +138,7 @@ body {
 
 @keyframes move-across {
   0% { left: 0%; }
-  50% { left: calc(100% - 120px); }
+  50% { left: calc(100% - 100px); }
 }
 
 /* --- Purple Banner --- */
@@ -131,7 +148,7 @@ body {
   font-weight:bold; 
   height: var(--purple-height); 
   width:100%; 
-  border-top: none; /* connects directly to date-banner */
+  border-top:none;
   display:flex; 
   justify-content:center; 
   align-items:center; 
@@ -144,58 +161,65 @@ body {
   object-fit:cover; 
 }
 
-/* ---------- Button ---------- */
-.button { 
-  display:block; 
-  background:#2f8df1; 
-  color:#fff; 
-  text-align:center; 
-  margin:20px auto; 
-  text-decoration:none; 
-  border-radius:10px;
-  transition:background 0.3s; 
-  width: var(--button-width); 
-  height: var(--button-height); 
-  font-size: var(--button-font);
-  line-height: var(--button-height);
+/* ---------- Bottom Buttons ---------- */
+.bottom-buttons {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 15px;
 }
 
-.button:hover { background:#2e6095; }
+.bottom-btn {
+  background:#2f8df1;
+  color:#fff;
+  text-decoration:none;
+  font-size: var(--button-font);
+  padding:6px 14px;
+  border-radius:8px;
+  transition: background 0.3s;
+}
+
+.bottom-btn:hover { background:#2e6095; }
+
 </style>
 </head>
 <body>
-<div class="ticket">
-  <div class="header">
-    <span>nBus Zone - Multi Operator nBus - Adult - 1 week - West Midlands</span>
-  </div>
+  <div class="ticket">
+    <button class="close-btn" onclick="closeTicket()">Close</button>
+    
+    <div class="header">
+      <span>nBus Zone - Multi Operator nBus - Adult - 1 week - West Midlands</span>
+    </div>
 
-  <div class="qr-code">
-    <canvas id="qrcode"></canvas>
-  </div>
+    <div class="qr-code">
+      <canvas id="qrcode"></canvas>
+    </div>
 
-  <div class="info">
-    Unlimited travel on all National Express buses and any other bus operator that is part of the nBus scheme within the West Midlands nBus zone.
-  </div>
+    <div class="info">
+      Unlimited travel on all National Express buses and any other bus operator that is part of the nBus scheme within the West Midlands nBus zone.
+    </div>
 
-  <div class="banner-section">
-    <div class="date-banner">
-      <div class="colors">
-        <div class="green"></div>
-        <div class="red"></div>
-        <div class="blue"></div>
+    <div class="banner-section">
+      <div class="date-banner">
+        <div class="colors">
+          <div class="green"></div>
+          <div class="red"></div>
+          <div class="blue"></div>
+        </div>
+        <span id="clock">--:--:-- --/--/----</span>
       </div>
-      <span id="clock">--:--:-- --/--/----</span>
+
+      <div class="purple-banner">
+        <img src="Images/IMG_3969.jpg" alt="Banner">
+      </div>
     </div>
 
-    <div class="purple-banner">
-      <img src="Images/IMG_3969.jpg" alt="Banner">
+    <div class="bottom-buttons">
+      <a href="#" class="bottom-btn">A...ons</a>
+      <a href="#" class="bottom-btn">D...ils</a>
     </div>
   </div>
 
-  <a class="button" href="#">NX Rewards Cashback</a>
-</div>
-
-<!-- QR Code + Clock Script -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 function updateClock() {
@@ -211,7 +235,7 @@ const IMAGE_WIDTH_SCALE = 0.25;
 const IMAGE_HEIGHT_SCALE = 0.25;  
 
 function generateFullQR(text) {
-  const QR = new QRCode(document.createElement('div'), { text:text, width:280, height:260 });
+  const QR = new QRCode(document.createElement('div'), { text:text, width:220, height:220 });
   const modules = QR._oQRCode.modules;
   const size = modules.length;
   const canvas = document.getElementById('qrcode');
@@ -248,6 +272,10 @@ function updateQR() {
 }
 setInterval(updateQR,2000);
 updateQR();
+
+function closeTicket() {
+  document.querySelector('.ticket').style.display = 'none';
+}
 </script>
 </body>
 </html>
