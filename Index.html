@@ -52,16 +52,20 @@ body {
 .close-btn:hover { color: #c62828; }
 
 /* ---------- Header Banner ---------- */
+/* ---------- Header Banner ---------- */
 .header { 
   background:#c62828; 
   color:#fff; 
-  padding:10px; 
+  padding:6px; 
   font-weight:900; 
-  height:48px; 
+  height:36px; 
   position:relative; 
   overflow:hidden; 
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .header span { 
@@ -69,6 +73,7 @@ body {
   white-space:nowrap; 
   animation:scroll-left 10s linear infinite; 
 }
+
 
 @keyframes scroll-left { 
   0% { transform:translateX(100%); } 
@@ -283,3 +288,4 @@ function closeTicket() {
 </script>
 </body>
 </html>
+
