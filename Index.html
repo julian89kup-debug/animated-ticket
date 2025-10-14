@@ -7,9 +7,9 @@
 <style>
 :root {
   --purple-height: 18vh;
-  --clock-font: 1rem;
+  --clock-font: 1.15rem; /* larger date text */
   --button-font: 1rem;
-  --date-banner-height: 44px;
+  --date-banner-height: 46px;
   --ticket-width: min(430px, 97%);
 }
 
@@ -57,10 +57,12 @@ body {
   background:#c62828; 
   color:#fff; 
   padding:10px; 
-  font-weight:bold; 
-  height:40px; 
+  font-weight:900; 
+  height:44px; 
   position:relative; 
   overflow:hidden; 
+  font-size: 1.1rem; /* larger header text */
+  letter-spacing: 0.5px;
 }
 
 .header span { 
@@ -79,7 +81,7 @@ body {
 
 #qrcode { 
   width:100%; 
-  max-width:250px;  /* slightly smaller */
+  max-width:250px;
   aspect-ratio: 1 / 1;
   margin:auto; 
   display:block; 
@@ -129,14 +131,14 @@ body {
   position: absolute;
   white-space: nowrap;
   color: #fff;
-  font-weight: bold;
+  font-weight: 900;
   font-size: var(--clock-font);
   animation: move-across 3s linear infinite alternate;
 }
 
 @keyframes move-across {
   0% { left: 0%; }
-  50% { left: calc(100% - 130px); }
+  50% { left: calc(100% - 140px); }
 }
 
 /* --- Purple Banner --- */
@@ -168,16 +170,19 @@ body {
 }
 
 .bottom-btn {
-  background:#2f8df1;
-  color:#fff;
+  background: transparent; /* no background */
+  color:#000; /* plain text */
   text-decoration:none;
   font-size: var(--button-font);
+  font-weight: bold;
   padding:8px 20px;
   border-radius:9px;
-  transition: background 0.3s;
+  transition: color 0.3s;
 }
 
-.bottom-btn:hover { background:#2e6095; }
+.bottom-btn:hover { 
+  color:#c62828; 
+}
 
 </style>
 </head>
