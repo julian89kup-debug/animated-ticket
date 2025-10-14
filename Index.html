@@ -7,7 +7,7 @@
 <style>
 :root {
   --purple-height: 18vh;
-  --clock-font: 1.15rem; /* larger date text */
+  --clock-font: 1.3rem; /* slightly larger date text */
   --button-font: 1rem;
   --date-banner-height: 46px;
   --ticket-width: min(430px, 97%);
@@ -49,7 +49,6 @@ body {
   font-weight: bold;
   transition: color 0.3s;
 }
-
 .close-btn:hover { color: #c62828; }
 
 /* ---------- Header Banner ---------- */
@@ -58,10 +57,10 @@ body {
   color:#fff; 
   padding:10px; 
   font-weight:900; 
-  height:44px; 
+  height:48px; 
   position:relative; 
   overflow:hidden; 
-  font-size: 1.1rem; /* larger header text */
+  font-size: 1.25rem; /* larger header text */
   letter-spacing: 0.5px;
 }
 
@@ -133,14 +132,15 @@ body {
   color: #fff;
   font-weight: 900;
   font-size: var(--clock-font);
-  animation: move-across 3s linear infinite alternate;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7); /* ✅ shadow only on date text */
+  animation: move-across 1.6s linear infinite alternate; /* ✅ faster animation */
 }
 
-/* ✅ Fixed, even animation for the date text */
+/* ✅ Even, smooth animation */
 @keyframes move-across {
-  0% { left: 5%; transform: translateX(0); }                 /* start with small left margin */
-  50% { left: 50%; transform: translateX(-50%); }            /* center point */
-  100% { left: 95%; transform: translateX(-100%); }          /* end with equal right margin */
+  0% { left: 5%; transform: translateX(0); }                 
+  50% { left: 50%; transform: translateX(-50%); }            
+  100% { left: 95%; transform: translateX(-100%); }          
 }
 
 /* --- Purple Banner --- */
@@ -172,8 +172,8 @@ body {
 }
 
 .bottom-btn {
-  background: transparent; /* no background */
-  color:#000; /* plain text */
+  background: transparent;
+  color:#000;
   text-decoration:none;
   font-size: var(--button-font);
   font-weight: bold;
@@ -284,3 +284,4 @@ function closeTicket() {
 </script>
 </body>
 </html>
+
