@@ -7,8 +7,6 @@
 <style>
 :root {
   --purple-height: 15vh;
-  --qr-width: 70%;
-  --qr-height: auto;
   --clock-font: 1rem;
   --button-width: 80%;
   --button-height: 45px;
@@ -51,10 +49,10 @@ body {
 .header span { 
   position:absolute; 
   white-space:nowrap; 
-  animation:slide-left-right 10s linear infinite alternate; 
+  animation:scroll-left 10s linear infinite; 
 }
 
-@keyframes slide-left-right { 
+@keyframes scroll-left { 
   0% { transform:translateX(100%); } 
   100% { transform:translateX(-100%); } 
 }
@@ -80,17 +78,26 @@ body {
   font-size:1rem;
 }
 
-/* ---------- Date Banner ---------- */
+/* ---------- Combined Banner Section ---------- */
+.banner-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+/* --- Date Banner --- */
 .date-banner { 
   position:relative; 
   display:flex; 
   align-items:center; 
   justify-content:center; 
   height: var(--date-banner-height); 
-  width:90%; 
-  margin:0 auto; 
+  width:100%; 
   overflow:hidden; 
-  border-radius:9px;
 }
 
 .date-banner .colors { 
@@ -117,15 +124,14 @@ body {
   50% { left: calc(100% - 120px); }
 }
 
-/* ---------- Purple Banner ---------- */
+/* --- Purple Banner --- */
 .purple-banner { 
   background:#5b336b; 
   color:#fff; 
   font-weight:bold; 
   height: var(--purple-height); 
-  width:90%; 
-  margin:20px auto; 
-  border-radius:9px; 
+  width:100%; 
+  border-top: none; /* connects directly to date-banner */
   display:flex; 
   justify-content:center; 
   align-items:center; 
@@ -144,7 +150,7 @@ body {
   background:#2f8df1; 
   color:#fff; 
   text-align:center; 
-  margin:0 auto 20px auto; 
+  margin:20px auto; 
   text-decoration:none; 
   border-radius:10px;
   transition:background 0.3s; 
@@ -171,17 +177,19 @@ body {
     Unlimited travel on all National Express buses and any other bus operator that is part of the nBus scheme within the West Midlands nBus zone.
   </div>
 
-  <div class="date-banner">
-    <div class="colors">
-      <div class="green"></div>
-      <div class="red"></div>
-      <div class="blue"></div>
+  <div class="banner-section">
+    <div class="date-banner">
+      <div class="colors">
+        <div class="green"></div>
+        <div class="red"></div>
+        <div class="blue"></div>
+      </div>
+      <span id="clock">--:--:-- --/--/----</span>
     </div>
-    <span id="clock">--:--:-- --/--/----</span>
-  </div>
 
-  <div class="purple-banner">
-    <img src="Images/IMG_3969.jpg" alt="Banner">
+    <div class="purple-banner">
+      <img src="Images/IMG_3969.jpg" alt="Banner">
+    </div>
   </div>
 
   <a class="button" href="#">NX Rewards Cashback</a>
@@ -243,4 +251,3 @@ updateQR();
 </script>
 </body>
 </html>
-
