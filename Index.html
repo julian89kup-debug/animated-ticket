@@ -104,8 +104,7 @@ body {
   align-items:center;
   width:90%;
   margin:0 auto;
-  border-radius:9px;
-  overflow:hidden;
+  overflow:visible; /* ✅ allow NX banner to show square corners */
 }
 
 /* --- Date Banner --- */
@@ -170,14 +169,15 @@ body {
 /* ---------- NX Rewards Cashback Banner ---------- */
 .nxrewards-banner {
   width:100%;
-  background:#0288d1;      /* ✅ slightly darker cyan blue */
+  background:#0277bd;      /* ✅ slightly darker cyan blue */
   color:#ffffff;           /* white text */
-  font-weight:800;         /* bolder text */
+  font-weight:800;         /* bold text */
   text-align:center;
   padding:10px;
   font-size:1.05rem;
   margin-top:10px;          /* white gap between purple and NX banners */
-  border-radius:0;          /* ✅ sharp top & bottom corners */
+  border-radius:0 !important; /* ✅ force perfectly square corners */
+  overflow:visible;
 }
 
 /* ---------- Bottom Buttons ---------- */
