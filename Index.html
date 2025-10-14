@@ -117,6 +117,7 @@ body {
   height: var(--date-banner-height); 
   width:100%; 
   overflow:hidden; 
+  border-radius:9px 9px 0 0;
 }
 
 .date-banner .colors { 
@@ -153,11 +154,11 @@ body {
   font-weight:bold; 
   height:var(--purple-height); 
   width:100%; 
-  border-top:none;
   display:flex; 
   justify-content:center; 
   align-items:center; 
   overflow:hidden;
+  border-radius:0 0 9px 9px; /* ✅ Rounded bottom corners */
 }
 
 .purple-banner img { 
@@ -168,20 +169,15 @@ body {
 
 /* ---------- NX Rewards Cashback Banner ---------- */
 .nxrewards-banner {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  background:#1a237e; /* dark blue */
-  color:#fff;
-  font-weight:600;
+  width:100%;
+  background:#b3e5fc;      /* light cyan background */
+  color:#1565c0;           /* blue text */
+  font-weight:700;
+  text-align:center;
   padding:10px;
-  font-size:0.95rem;
-}
-
-.nxrewards-banner img {
-  height:24px;
-  width:auto;
+  font-size:1rem;
+  margin-top:10px;          /* ✅ white gap between purple and NX banners */
+  border-radius:9px;        /* same rounded edges look */
 }
 
 /* ---------- Bottom Buttons ---------- */
@@ -237,8 +233,7 @@ body {
 
       <!-- ✅ NX Rewards Cashback Banner -->
       <div class="nxrewards-banner">
-        <img src="Images/NXRewardsLogo.png" alt="NX Rewards Logo">
-        <span>NX Rewards Cashback</span>
+        NX Rewards Cashback
       </div>
     </div>
 
