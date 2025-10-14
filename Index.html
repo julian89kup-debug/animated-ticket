@@ -136,9 +136,11 @@ body {
   animation: move-across 3s linear infinite alternate;
 }
 
+/* ✅ Fixed, even animation for the date text */
 @keyframes move-across {
-  0% { left: 0%; }
-  50% { left: calc(100% - 140px); }
+  0% { left: 5%; transform: translateX(0); }                 /* start with small left margin */
+  50% { left: 50%; transform: translateX(-50%); }            /* center point */
+  100% { left: 95%; transform: translateX(-100%); }          /* end with equal right margin */
 }
 
 /* --- Purple Banner --- */
