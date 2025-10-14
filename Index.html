@@ -167,7 +167,7 @@ body {
   object-fit:cover; 
 }
 
-/* ---------- Bottom Buttons (as text) ---------- */
+/* ---------- Bottom Buttons ---------- */
 .bottom-buttons {
   display:flex;
   justify-content:space-between;
@@ -227,26 +227,51 @@ body {
     </div>
   </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-/* Keep your original animated QR effect */
-function generateFullQR() {
+/* ✅ ORIGINAL QR CODE RESTORED FROM YOUR FILE */
+const IMAGE_WIDTH_SCALE = 0.25;
+const IMAGE_HEIGHT_SCALE = 0.25;
+
+function generateFullQR(text) {
+  const QR = new QRCode(document.createElement('div'), { text:text, width:300, height:300 });
+  const modules = QR._oQRCode.modules;
+  const size = modules.length;
   const canvas = document.getElementById('qrcode');
   const ctx = canvas.getContext('2d');
-  const size = 100;
-  canvas.width = 250;
-  canvas.height = 250;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   const cellW = canvas.width / size;
   const cellH = canvas.height / size;
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  const reserveWidth = Math.floor(size * IMAGE_WIDTH_SCALE);
+  const reserveHeight = Math.floor(size * IMAGE_HEIGHT_SCALE);
+  const startRow = Math.floor((size - reserveHeight) / 2);
+  const endRow = startRow + reserveHeight;
+  const startCol = Math.floor((size - reserveWidth) / 2);
+  const endCol = startCol + reserveWidth;
+
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
+      if (r >= startRow && r < endRow && c >= startCol && c < endCol) continue;
       if (Math.random() > 0.5) ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
     }
   }
-}
-setInterval(generateFullQR, 2000);
-generateFullQR();
 
+  const img = new Image();
+  img.src = "Images/IMG_4092.jpg";
+  img.onload = function () {
+    ctx.drawImage(img, startCol*cellW, startRow*cellH, reserveWidth*cellW, reserveHeight*cellH);
+  };
+}
+
+function updateQR() {
+  const now = new Date();
+  generateFullQR("Ticket-" + now.getTime());
+}
+setInterval(updateQR,2000);
+updateQR();
+
+/* ---------- CLOCK ---------- */
 function updateClock() {
   const now = new Date();
   const time = now.toLocaleTimeString('en-GB', { hour12:false });
@@ -256,6 +281,7 @@ function updateClock() {
 setInterval(updateClock,1000);
 updateClock();
 
+/* ---------- CLOSE FUNCTION ---------- */
 function closeTicket() {
   document.querySelector('.ticket').style.display = 'none';
 }
