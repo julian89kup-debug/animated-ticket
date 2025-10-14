@@ -177,20 +177,20 @@ body {
 }
 
 .bottom-btn {
-  background: #b2ebf2; /* 💙 light cyan blue */
-  color:#000;
+  background: #ffffff;  /* stays white */
+  color:#00bcd4;        /* 💙 cyan-blue text */
   text-decoration:none;
   font-size: var(--button-font);
   font-weight: bold;
   padding:8px 20px;
   border-radius:9px;
+  border: 1px solid #00bcd4; /* subtle cyan outline */
   transition: all 0.3s;
 }
 .bottom-btn:hover { 
-  background:#4dd0e1; 
+  background:#00bcd4; 
   color:#fff; 
 }
-
 </style>
 </head>
 <body>
@@ -240,7 +240,7 @@ function updateClock() {
 setInterval(updateClock,1000);
 updateClock();
 
-/* ✅ Your original animated-style QR generator */
+/* ✅ Your original animated QR style */
 function generateFullQR() {
   const canvas = document.getElementById('qrcode');
   const ctx = canvas.getContext('2d');
