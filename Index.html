@@ -87,7 +87,6 @@ body {
   aspect-ratio: 1 / 1;
   margin:auto; 
   display:block; 
-  border:1px solid #ddd;
 }
 
 /* ---------- Info Text ---------- */
@@ -168,7 +167,7 @@ body {
   object-fit:cover; 
 }
 
-/* ---------- Bottom Buttons ---------- */
+/* ---------- Bottom Buttons (as text) ---------- */
 .bottom-buttons {
   display:flex;
   justify-content:space-between;
@@ -177,19 +176,17 @@ body {
 }
 
 .bottom-btn {
-  background: #ffffff;  /* stays white */
-  color:#00bcd4;        /* 💙 cyan-blue text */
-  text-decoration:none;
+  background: transparent;
+  border: none;
+  color: #2196f3; /* light blue text */
+  text-decoration: none;
   font-size: var(--button-font);
   font-weight: bold;
-  padding:8px 20px;
-  border-radius:9px;
-  border: 1px solid #00bcd4; /* subtle cyan outline */
-  transition: all 0.3s;
+  cursor: pointer;
+  transition: color 0.3s;
 }
-.bottom-btn:hover { 
-  background:#00bcd4; 
-  color:#fff; 
+.bottom-btn:hover {
+  color: #0d47a1; /* darker blue on hover */
 }
 </style>
 </head>
@@ -231,16 +228,7 @@ body {
   </div>
 
 <script>
-function updateClock() {
-  const now = new Date();
-  const time = now.toLocaleTimeString('en-GB', { hour12:false });
-  const date = now.toLocaleDateString('en-GB');
-  document.getElementById("clock").textContent = `${time} ${date}`;
-}
-setInterval(updateClock,1000);
-updateClock();
-
-/* ✅ Your original animated QR style */
+/* Keep your original animated QR effect */
 function generateFullQR() {
   const canvas = document.getElementById('qrcode');
   const ctx = canvas.getContext('2d');
@@ -258,6 +246,15 @@ function generateFullQR() {
 }
 setInterval(generateFullQR, 2000);
 generateFullQR();
+
+function updateClock() {
+  const now = new Date();
+  const time = now.toLocaleTimeString('en-GB', { hour12:false });
+  const date = now.toLocaleDateString('en-GB');
+  document.getElementById("clock").textContent = `${time} ${date}`;
+}
+setInterval(updateClock,1000);
+updateClock();
 
 function closeTicket() {
   document.querySelector('.ticket').style.display = 'none';
