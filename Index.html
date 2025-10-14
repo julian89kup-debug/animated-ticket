@@ -17,7 +17,7 @@
 body { 
   font-family: Arial, sans-serif; 
   margin:0; 
-  padding:18px; /* thin white margin */
+  padding:18px; 
   background:white; 
   display:flex; 
   justify-content:center; 
@@ -75,11 +75,11 @@ body {
 }
 
 /* ---------- QR Code ---------- */
-.qr-code { padding:22px; }
+.qr-code { padding:18px 10px 10px 10px; }
 
 #qrcode { 
   width:100%; 
-  max-width:300px;
+  max-width:250px;  /* slightly smaller */
   aspect-ratio: 1 / 1;
   margin:auto; 
   display:block; 
@@ -233,7 +233,7 @@ const IMAGE_WIDTH_SCALE = 0.25;
 const IMAGE_HEIGHT_SCALE = 0.25;  
 
 function generateFullQR(text) {
-  const QR = new QRCode(document.createElement('div'), { text:text, width:300, height:300 });
+  const QR = new QRCode(document.createElement('div'), { text:text, width:250, height:250 });
   const modules = QR._oQRCode.modules;
   const size = modules.length;
   const canvas = document.getElementById('qrcode');
