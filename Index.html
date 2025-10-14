@@ -36,22 +36,21 @@ body {
   position:relative;
 }
 
-/* ---------- Close Button ---------- */
-.close-btn {
+/* ---------- NEW Close Button (Top Corner) ---------- */
+.top-close-btn {
   position: absolute;
-  top: 8px;
-  right: 12px;
-  color: #333;
+  top: -36px;
+  right: 8px;
   background: transparent;
+  color: black;
   border: none;
   font-size: 1rem;
-  cursor: pointer;
   font-weight: bold;
+  cursor: pointer;
   transition: color 0.3s;
 }
-.close-btn:hover { color: #c62828; }
+.top-close-btn:hover { color: #c62828; }
 
-/* ---------- Header Banner ---------- */
 /* ---------- Header Banner ---------- */
 .header { 
   background:#c62828; 
@@ -73,7 +72,6 @@ body {
   white-space:nowrap; 
   animation:scroll-left 10s linear infinite; 
 }
-
 
 @keyframes scroll-left { 
   0% { transform:translateX(100%); } 
@@ -130,7 +128,7 @@ body {
 
 /* 🌈 Brighter, more colorful 3-part bars */
 .date-banner .green { background: #9ca2f8; flex: 1; } /* lavender-blue */
-.date-banner .red { background: #d16a8a; flex: 1; }  /* rich rose-pink */
+.date-banner .red { background: #d16a8a; flex: 1; }  /* rose-pink */
 .date-banner .blue { background: #f7b65b; flex: 1; } /* golden peach */
 
 .date-banner span {
@@ -179,22 +177,25 @@ body {
 }
 
 .bottom-btn {
-  background: transparent;
+  background: #b2ebf2; /* 💙 light cyan blue */
   color:#000;
   text-decoration:none;
   font-size: var(--button-font);
   font-weight: bold;
   padding:8px 20px;
   border-radius:9px;
-  transition: color 0.3s;
+  transition: all 0.3s;
 }
-.bottom-btn:hover { color:#c62828; }
+.bottom-btn:hover { 
+  background:#4dd0e1; 
+  color:#fff; 
+}
 
 </style>
 </head>
 <body>
   <div class="ticket">
-    <button class="close-btn" onclick="closeTicket()">Close</button>
+    <button class="top-close-btn" onclick="closeTicket()">Close</button>
     
     <div class="header">
       <span>nBus Zone - Multi Operator nBus - Adult - 1 week - West Midlands</span>
@@ -229,7 +230,6 @@ body {
     </div>
   </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
 function updateClock() {
   const now = new Date();
@@ -240,47 +240,24 @@ function updateClock() {
 setInterval(updateClock,1000);
 updateClock();
 
-/* ✅ Restored your original random-style QR generator */
-const IMAGE_WIDTH_SCALE = 0.25;   
-const IMAGE_HEIGHT_SCALE = 0.25;  
-
-function generateFullQR(text) {
-  const QR = new QRCode(document.createElement('div'), { text:text, width:300, height:300 });
-  const modules = QR._oQRCode.modules;
-  const size = modules.length;
+/* ✅ Your original animated-style QR generator */
+function generateFullQR() {
   const canvas = document.getElementById('qrcode');
   const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const size = 100;
+  canvas.width = 250;
+  canvas.height = 250;
   const cellW = canvas.width / size;
   const cellH = canvas.height / size;
-
-  const reserveWidth = Math.floor(size * IMAGE_WIDTH_SCALE);
-  const reserveHeight = Math.floor(size * IMAGE_HEIGHT_SCALE);
-  const startRow = Math.floor((size - reserveHeight) / 2);
-  const endRow = startRow + reserveHeight;
-  const startCol = Math.floor((size - reserveWidth) / 2);
-  const endCol = startCol + reserveWidth;
-
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
-      if (r >= startRow && r < endRow && c >= startCol && c < endCol) continue;
       if (Math.random() > 0.5) ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
     }
   }
-
-  const img = new Image();
-  img.src = "Images/IMG_4092.jpg";
-  img.onload = function () {
-    ctx.drawImage(img, startCol*cellW, startRow*cellH, reserveWidth*cellW, reserveHeight*cellH);
-  };
 }
-
-function updateQR() {
-  const now = new Date();
-  generateFullQR("Ticket-" + now.getTime());
-}
-setInterval(updateQR,2000);
-updateQR();
+setInterval(generateFullQR, 2000);
+generateFullQR();
 
 function closeTicket() {
   document.querySelector('.ticket').style.display = 'none';
@@ -288,4 +265,3 @@ function closeTicket() {
 </script>
 </body>
 </html>
-
