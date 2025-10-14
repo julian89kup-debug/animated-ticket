@@ -114,18 +114,13 @@ body {
   height: var(--date-banner-height); 
   width:100%; 
   overflow:hidden; 
+  background: linear-gradient(to right, 
+    #b6b9e6 0%, 
+    #b6b9e6 33%, 
+    #d48ca2 66%, 
+    #f7c989 100%
+  ); /* 🌈 smooth gradient blend */
 }
-
-.date-banner .colors { 
-  display:flex; 
-  width:100%; 
-  height:100%; 
-}
-
-/* ✅ Updated pastel colors */
-.date-banner .green { background: #e0e2f1; flex: 1; }
-.date-banner .red { background: #dcc0cb; flex: 1; }
-.date-banner .blue { background: #faecd4; flex: 1; }
 
 .date-banner span {
   position: absolute;
@@ -204,11 +199,6 @@ body {
 
     <div class="banner-section">
       <div class="date-banner">
-        <div class="colors">
-          <div class="green"></div>
-          <div class="red"></div>
-          <div class="blue"></div>
-        </div>
         <span id="clock">--:--:-- --/--/----</span>
       </div>
 
