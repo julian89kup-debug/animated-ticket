@@ -89,6 +89,36 @@ body {
   display:block; 
 }
 
+/* ---------- Color Picker Section ---------- */
+.color-picker-container {
+  display:flex;
+  justify-content:space-around;
+  align-items:center;
+  margin:10px auto 0 auto;
+  width:85%;
+  background:#f5f5f5;
+  border-radius:8px;
+  padding:10px;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,0.15);
+}
+
+.color-picker {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  font-size:0.85rem;
+  font-weight:bold;
+  color:#444;
+}
+.color-picker input {
+  width:45px;
+  height:45px;
+  border:none;
+  cursor:pointer;
+  background:transparent;
+  padding:0;
+}
+
 /* ---------- Info Text ---------- */
 .info { 
   padding:12px; 
@@ -104,7 +134,7 @@ body {
   align-items:center;
   width:90%;
   margin:0 auto;
-  overflow:visible; /* ✅ allow NX banner to show square corners */
+  overflow:visible;
 }
 
 /* --- Date Banner --- */
@@ -125,7 +155,6 @@ body {
   height:100%; 
 }
 
-/* 🌈 Brighter 3-part bars */
 .date-banner .green { background:#92A3D6; flex:1; }
 .date-banner .red { background:#54596A; flex:1; }
 .date-banner .blue { background:#FCFCFC; flex:1; }
@@ -157,7 +186,7 @@ body {
   justify-content:center; 
   align-items:center; 
   overflow:hidden;
-  border-radius:0 0 9px 9px; /* rounded bottom corners */
+  border-radius:0 0 9px 9px; 
 }
 
 .purple-banner img { 
@@ -169,14 +198,14 @@ body {
 /* ---------- NX Rewards Cashback Banner ---------- */
 .nxrewards-banner {
   width:100%;
-  background:#0277bd;      /* ✅ slightly darker cyan blue */
-  color:#ffffff;           /* white text */
-  font-weight:800;         /* bold text */
+  background:#0277bd; 
+  color:#ffffff;           
+  font-weight:800;         
   text-align:center;
   padding:10px;
   font-size:1.05rem;
-  margin-top:10px;          /* white gap between purple and NX banners */
-  border-radius:0 !important; /* ✅ force perfectly square corners */
+  margin-top:10px;          
+  border-radius:0 !important;
   overflow:visible;
 }
 
@@ -191,7 +220,7 @@ body {
 .bottom-btn {
   background:transparent;
   border:none;
-  color:#2196f3; /* light blue text */
+  color:#2196f3;
   text-decoration:none;
   font-size:var(--button-font);
   font-weight:bold;
@@ -213,6 +242,22 @@ body {
       <canvas id="qrcode"></canvas>
     </div>
 
+    <!-- 🎨 COLOR PICKER WHEEL SECTION -->
+    <div class="color-picker-container">
+      <div class="color-picker">
+        <label for="greenColor">Green</label>
+        <input type="color" id="greenColor" value="#92A3D6">
+      </div>
+      <div class="color-picker">
+        <label for="redColor">Red</label>
+        <input type="color" id="redColor" value="#54596A">
+      </div>
+      <div class="color-picker">
+        <label for="blueColor">Blue</label>
+        <input type="color" id="blueColor" value="#FCFCFC">
+      </div>
+    </div>
+
     <div class="info">
       Unlimited travel on all National Express buses and any other bus operator that is part of the nBus scheme within the West Midlands nBus zone.
     </div>
@@ -231,7 +276,6 @@ body {
         <img src="Images/IMG_3969.jpg" alt="Banner">
       </div>
 
-      <!-- ✅ NX Rewards Cashback Banner -->
       <div class="nxrewards-banner">
         NX Rewards Cashback
       </div>
@@ -245,7 +289,7 @@ body {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-/* ✅ Original animated QR restored */
+/* ✅ QR Code Generator */
 const IMAGE_WIDTH_SCALE = 0.25;
 const IMAGE_HEIGHT_SCALE = 0.25;
 
@@ -301,7 +345,19 @@ updateClock();
 function closeTicket() {
   document.querySelector('.ticket').style.display = 'none';
 }
+
+/* ---------- COLOR PICKER FUNCTIONALITY ---------- */
+const colorPickers = {
+  green: document.getElementById("greenColor"),
+  red: document.getElementById("redColor"),
+  blue: document.getElementById("blueColor")
+};
+
+Object.keys(colorPickers).forEach(color => {
+  colorPickers[color].addEventListener("input", e => {
+    document.querySelector(`.date-banner .${color}`).style.background = e.target.value;
+  });
+});
 </script>
 </body>
 </html>
-
