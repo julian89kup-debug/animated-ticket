@@ -89,36 +89,6 @@ body {
   display:block; 
 }
 
-/* ---------- Color Picker Section ---------- */
-.color-picker-container {
-  display:flex;
-  justify-content:space-around;
-  align-items:center;
-  margin:10px auto 0 auto;
-  width:85%;
-  background:#f5f5f5;
-  border-radius:8px;
-  padding:10px;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.15);
-}
-
-.color-picker {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  font-size:0.85rem;
-  font-weight:bold;
-  color:#444;
-}
-.color-picker input {
-  width:45px;
-  height:45px;
-  border:none;
-  cursor:pointer;
-  background:transparent;
-  padding:0;
-}
-
 /* ---------- Info Text ---------- */
 .info { 
   padding:12px; 
@@ -155,9 +125,10 @@ body {
   height:100%; 
 }
 
-.date-banner .green { background:#92A3D6; flex:1; }
-.date-banner .red { background:#54596A; flex:1; }
-.date-banner .blue { background:#FCFCFC; flex:1; }
+/* 🎨 Updated 3-part color scheme */
+.date-banner .green { background:#f4f0fa; flex:1; }  /* very light purple */
+.date-banner .red { background:#c2c9d6; flex:1; }    /* blue-grey */
+.date-banner .blue { background:#b7c1ce; flex:1; }   /* slightly darker blue-grey */
 
 .date-banner span {
   position:absolute;
@@ -186,7 +157,7 @@ body {
   justify-content:center; 
   align-items:center; 
   overflow:hidden;
-  border-radius:0 0 9px 9px; 
+  border-radius:0 0 9px 9px; /* rounded bottom corners */
 }
 
 .purple-banner img { 
@@ -198,14 +169,14 @@ body {
 /* ---------- NX Rewards Cashback Banner ---------- */
 .nxrewards-banner {
   width:100%;
-  background:#0277bd; 
+  background:#0277bd;      /* darker cyan blue */
   color:#ffffff;           
   font-weight:800;         
   text-align:center;
   padding:10px;
   font-size:1.05rem;
-  margin-top:10px;          
-  border-radius:0 !important;
+  margin-top:10px;
+  border-radius:0 !important; 
   overflow:visible;
 }
 
@@ -220,7 +191,7 @@ body {
 .bottom-btn {
   background:transparent;
   border:none;
-  color:#2196f3;
+  color:#2196f3; 
   text-decoration:none;
   font-size:var(--button-font);
   font-weight:bold;
@@ -240,22 +211,6 @@ body {
 
     <div class="qr-code">
       <canvas id="qrcode"></canvas>
-    </div>
-
-    <!-- 🎨 COLOR PICKER WHEEL SECTION -->
-    <div class="color-picker-container">
-      <div class="color-picker">
-        <label for="greenColor">Green</label>
-        <input type="color" id="greenColor" value="#92A3D6">
-      </div>
-      <div class="color-picker">
-        <label for="redColor">Red</label>
-        <input type="color" id="redColor" value="#54596A">
-      </div>
-      <div class="color-picker">
-        <label for="blueColor">Blue</label>
-        <input type="color" id="blueColor" value="#FCFCFC">
-      </div>
     </div>
 
     <div class="info">
@@ -289,7 +244,6 @@ body {
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script>
-/* ✅ QR Code Generator */
 const IMAGE_WIDTH_SCALE = 0.25;
 const IMAGE_HEIGHT_SCALE = 0.25;
 
@@ -345,19 +299,6 @@ updateClock();
 function closeTicket() {
   document.querySelector('.ticket').style.display = 'none';
 }
-
-/* ---------- COLOR PICKER FUNCTIONALITY ---------- */
-const colorPickers = {
-  green: document.getElementById("greenColor"),
-  red: document.getElementById("redColor"),
-  blue: document.getElementById("blueColor")
-};
-
-Object.keys(colorPickers).forEach(color => {
-  colorPickers[color].addEventListener("input", e => {
-    document.querySelector(`.date-banner .${color}`).style.background = e.target.value;
-  });
-});
 </script>
 </body>
 </html>
