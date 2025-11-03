@@ -79,14 +79,18 @@ body {
 }
 
 /* ---------- QR Code ---------- */
-.qr-code { padding:18px 10px 10px 10px; }
+.qr-code { 
+  padding:18px 10px 10px 10px; 
+}
 
 #qrcode { 
   width:100%; 
   max-width:250px;
+  height:auto;
   aspect-ratio: 1 / 1;
   margin:auto; 
   display:block; 
+  border: 1px solid #eee;
 }
 
 /* ---------- Info Text ---------- */
@@ -119,6 +123,7 @@ body {
   border-radius:9px 9px 0 0;
 }
 
+/* color stripes */
 .date-banner .green { 
   background: #006400; /* dark green */
   flex: 1; 
@@ -133,9 +138,6 @@ body {
   background: #7B68EE; /* blue-purple (medium slate blue) */
   flex: 1; 
 }
-
-
-  
 
 .date-banner span {
   position:absolute;
@@ -217,7 +219,7 @@ body {
     </div>
 
     <div class="qr-code">
-      <canvas id="qrcode"></canvas>
+      <canvas id="qrcode" width="250" height="250"></canvas>
     </div>
 
     <div class="info">
@@ -226,11 +228,9 @@ body {
 
     <div class="banner-section">
       <div class="date-banner">
-        <div class="colors">
-          <div class="green"></div>
-          <div class="red"></div>
-          <div class="blue"></div>
-        </div>
+        <div class="green"></div>
+        <div class="red"></div>
+        <div class="blue"></div>
         <span id="clock">--:--:-- --/--/----</span>
       </div>
 
@@ -255,12 +255,13 @@ const IMAGE_WIDTH_SCALE = 0.25;
 const IMAGE_HEIGHT_SCALE = 0.25;
 
 function generateFullQR(text) {
-  const QR = new QRCode(document.createElement('div'), { text:text, width:300, height:300 });
-  const modules = QR._oQRCode.modules;
+  const tempQR = new QRCode(document.createElement('div'), { text:text, width:300, height:300 });
+  const modules = tempQR._oQRCode.modules;
   const size = modules.length;
   const canvas = document.getElementById('qrcode');
   const ctx = canvas.getContext('2d');
-  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   const cellW = canvas.width / size;
   const cellH = canvas.height / size;
 
@@ -274,13 +275,13 @@ function generateFullQR(text) {
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
       if (r >= startRow && r < endRow && c >= startCol && c < endCol) continue;
-      if (Math.random() > 0.5) ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
+      if (modules[r][c]) ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
     }
   }
 
   const img = new Image();
   img.src = "Images/IMG_4092.jpg";
-  img.onload = function () {
+  img.onload = function() {
     ctx.drawImage(img, startCol*cellW, startRow*cellH, reserveWidth*cellW, reserveHeight*cellH);
   };
 }
@@ -289,74 +290,25 @@ function updateQR() {
   const now = new Date();
   generateFullQR("Ticket-" + now.getTime());
 }
-setInterval(updateQR,2000);
-updateQR();
 
-/* ---------- CLOCK ---------- */
 function updateClock() {
   const now = new Date();
   const time = now.toLocaleTimeString('en-GB', { hour12:false });
   const date = now.toLocaleDateString('en-GB');
   document.getElementById("clock").textContent = `${time} ${date}`;
 }
-setInterval(updateClock,1000);
-updateClock();
 
-/* ---------- CLOSE FUNCTION ---------- */
 function closeTicket() {
-  document.querySelector('.ticket').style.display = 'none';
+  const t = document.querySelector('.ticket');
+  t.style.transition = 'opacity 0.4s';
+  t.style.opacity = '0';
+  setTimeout(() => t.remove(), 400);
 }
+
+setInterval(updateQR, 2000);
+setInterval(updateClock, 1000);
+updateQR();
+updateClock();
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
