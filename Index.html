@@ -111,32 +111,29 @@ body {
   overflow:visible;
 }
 
-/* --- Date Banner --- */
-.date-banner { 
-  position:relative; 
-  display:flex; 
-  align-items:center; 
-  justify-content:center; 
-  height: var(--date-banner-height); 
-  width:100%; 
-  overflow:hidden; 
-  border-radius:9px 9px 0 0;
+/* make color bars fill background */
+.date-banner .green,
+.date-banner .red,
+.date-banner .blue {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 33.333%;
 }
 
-/* color stripes */
 .date-banner .green { 
+  left: 0;
   background: #006400; /* dark green */
-  flex: 1; 
 }
 
 .date-banner .red { 
+  left: 33.333%;
   background: #800020; /* dark red / burgundy */
-  flex: 1; 
 }
 
 .date-banner .blue { 
+  left: 66.666%;
   background: #7B68EE; /* blue-purple (medium slate blue) */
-  flex: 1; 
 }
 
 .date-banner span {
@@ -312,3 +309,4 @@ updateClock();
 </script>
 </body>
 </html>
+
