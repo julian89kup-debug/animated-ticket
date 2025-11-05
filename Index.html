@@ -246,21 +246,21 @@ body {
     </div>
   </div>
 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <script>
-const IMAGE_WIDTH_SCALE = 0.25;
-const IMAGE_HEIGHT_SCALE = 0.25;
+/* 👉 Original random-pattern QR logic restored */
+const IMAGE_WIDTH_SCALE = 0.25;   
+const IMAGE_HEIGHT_SCALE = 0.25;  
 
-/* ✅ Clean QR — only original modules, no extra random squares */
 function generateFullQR(text) {
-  const tempQR = new QRCode(document.createElement('div'), { text:text, width:300, height:300 });
-  const modules = tempQR._oQRCode.modules;
+  const QR = new QRCode(document.createElement('div'), { text:text, width:220, height:220 });
+  const modules = QR._oQRCode.modules;
   const size = modules.length;
   const canvas = document.getElementById('qrcode');
   const ctx = canvas.getContext('2d');
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+  ctx.clearRect(0,0,canvas.width,canvas.height);
   const cellW = canvas.width / size;
   const cellH = canvas.height / size;
 
@@ -268,38 +268,24 @@ function generateFullQR(text) {
   const reserveHeight = Math.floor(size * IMAGE_HEIGHT_SCALE);
 
   const startRow = Math.floor((size - reserveHeight) / 2);
-  const startCol = Math.floor((size - reserveWidth) / 2);
   const endRow = startRow + reserveHeight;
+  const startCol = Math.floor((size - reserveWidth) / 2);
   const endCol = startCol + reserveWidth;
 
-  /* ✅ Draw ONLY true QR dots */
+  // ✅ original random square logic
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
       if (r >= startRow && r < endRow && c >= startCol && c < endCol) continue;
-      if (modules[r][c]) {
-        ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
-      }
+      if (Math.random() > 0.5) ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
     }
   }
 
   /* ✅ Insert center logo */
   const img = new Image();
   img.src = "Images/IMG_4092.jpg";
-  img.onerror = () => console.log("⚠️ QR insert image failed — path wrong?");
-  img.onload = function() {
-    ctx.drawImage(
-      img,
-      startCol * cellW,
-      startRow * cellH,
-      reserveWidth * cellW,
-      reserveHeight * cellH
-    );
+  img.onload = function () {
+    ctx.drawImage(img, startCol*cellW, startRow*cellH, reserveWidth*cellW, reserveHeight*cellH);
   };
-}
-
-function updateQR() {
-  const now = new Date();
-  generateFullQR("Ticket-" + now.getTime());
 }
 
 /* live clock */
@@ -310,6 +296,12 @@ function updateClock() {
   document.getElementById("clock").textContent = `${time} ${date}`;
 }
 
+/* update QR frequently */
+function updateQR() {
+  const now = new Date();
+  generateFullQR("Ticket-" + now.getTime());
+}
+
 function closeTicket() {
   const t = document.querySelector('.ticket');
   t.style.transition = 'opacity 0.4s';
@@ -317,8 +309,8 @@ function closeTicket() {
   setTimeout(() => t.remove(), 400);
 }
 
-setInterval(updateQR, 2000);
-setInterval(updateClock, 1000);
+setInterval(updateQR,2000);
+setInterval(updateClock,1000);
 updateQR();
 updateClock();
 </script>
