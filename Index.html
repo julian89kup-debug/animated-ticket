@@ -139,7 +139,13 @@ body {
   font-weight:900;
   font-size:var(--clock-font);
   text-shadow:1px 1px 3px rgba(0,0,0,0.7);
-  animation:none; /* ✅ FIX: no movement so clock stays visible */
+  animation:clock-bounce 2.8s ease-in-out infinite alternate;
+}
+
+/* ✅ Bounce left → right */
+@keyframes clock-bounce {
+  0% { left:3%; transform:translateX(0); }
+  100% { left:97%; transform:translateX(-100%); }
 }
 
 /* --- Purple Banner --- */
@@ -246,6 +252,7 @@ body {
 const IMAGE_WIDTH_SCALE = 0.25;
 const IMAGE_HEIGHT_SCALE = 0.25;
 
+/* ✅ Clean QR — only original modules, no extra random squares */
 function generateFullQR(text) {
   const tempQR = new QRCode(document.createElement('div'), { text:text, width:300, height:300 });
   const modules = tempQR._oQRCode.modules;
@@ -262,22 +269,31 @@ function generateFullQR(text) {
 
   const startRow = Math.floor((size - reserveHeight) / 2);
   const startCol = Math.floor((size - reserveWidth) / 2);
-
   const endRow = startRow + reserveHeight;
   const endCol = startCol + reserveWidth;
 
+  /* ✅ Draw ONLY true QR dots */
   for (let r = 0; r < size; r++) {
     for (let c = 0; c < size; c++) {
       if (r >= startRow && r < endRow && c >= startCol && c < endCol) continue;
-      if (modules[r][c]) ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
+      if (modules[r][c]) {
+        ctx.fillRect(c * cellW, r * cellH, cellW, cellH);
+      }
     }
   }
 
+  /* ✅ Insert center logo */
   const img = new Image();
-  img.src = "Images/IMG_4092.jpg";  /* ✅ verify file exists */
-  img.onerror = () => console.log("QR insert image failed - check file path");
+  img.src = "Images/IMG_4092.jpg";
+  img.onerror = () => console.log("⚠️ QR insert image failed — path wrong?");
   img.onload = function() {
-    ctx.drawImage(img, startCol * cellW, startRow * cellH, reserveWidth * cellW, reserveHeight * cellH);
+    ctx.drawImage(
+      img,
+      startCol * cellW,
+      startRow * cellH,
+      reserveWidth * cellW,
+      reserveHeight * cellH
+    );
   };
 }
 
@@ -286,6 +302,7 @@ function updateQR() {
   generateFullQR("Ticket-" + now.getTime());
 }
 
+/* live clock */
 function updateClock() {
   const now = new Date();
   const time = now.toLocaleTimeString('en-GB', { hour12:false });
