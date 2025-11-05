@@ -110,31 +110,36 @@ body {
   margin:0 auto;
   overflow:visible;
 }
+/* small colored banners */
+.date-banner {
+  position: relative;
+  height: 20px; /* make them smaller */
+}
 
-/* make color bars fill background */
 .date-banner .green,
 .date-banner .red,
 .date-banner .blue {
   position: absolute;
   top: 0;
-  bottom: 0;
+  height: 100%;
   width: 33.333%;
 }
 
 .date-banner .green { 
   left: 0;
-  background: #006400; /* dark green */
+  background: #006400;
 }
 
 .date-banner .red { 
   left: 33.333%;
-  background: #800020; /* dark red / burgundy */
+  background: #800020;
 }
 
 .date-banner .blue { 
   left: 66.666%;
-  background: #7B68EE; /* blue-purple (medium slate blue) */
+  background: #7B68EE;
 }
+
 
 .date-banner span {
   position:absolute;
@@ -309,4 +314,5 @@ updateClock();
 </script>
 </body>
 </html>
+
 
