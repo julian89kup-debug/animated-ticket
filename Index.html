@@ -128,9 +128,22 @@ body {
   height:100%; 
 }
 
-.date-banner .green { background:#006400; flex:1; }
-.date-banner .red   { background:#800020; flex:1; }
-.date-banner .blue  { background:#7B68EE; flex:1; }
+.date-banner .green { 
+  background:#006400; 
+  flex:1; 
+  border-top-left-radius:10px;   /* ✅ ROUND LEFT */
+}
+
+.date-banner .red { 
+  background:#800020; 
+  flex:1; 
+}
+
+.date-banner .blue { 
+  background:#7B68EE; 
+  flex:1; 
+  border-top-right-radius:10px;  /* ✅ ROUND RIGHT */
+}
 
 .date-banner span {
   position:absolute;
@@ -316,3 +329,4 @@ updateClock();
 </script>
 </body>
 </html>
+
