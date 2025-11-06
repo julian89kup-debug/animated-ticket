@@ -128,21 +128,28 @@ body {
   height:100%; 
 }
 
+/* --- Date Banner Colors --- */
 .date-banner .green { 
-  background:#D4AF37;    /* ✅ Mustard yellow */
-  flex:1; 
-  border-top-left-radius:10px;   /* round left */
+  background: #8B0000;   /* rich crimson */
+  flex: 1; 
+  border-top-left-radius: 10px;
 }
 
 .date-banner .red { 
-  background:#20B2AA;    /* ✅ Teal / turquoise green */
-  flex:1; 
+  background: linear-gradient(
+    to right,
+    #FF8C00 0%,     /* deep orange */
+    #FF8C00 50%,
+    #1E90FF 50%,    /* strong blue */
+    #1E90FF 100%
+  );
+  flex: 1; 
 }
 
 .date-banner .blue { 
-  background:#32CD32;    /* ✅ Bright lime green */
-  flex:1; 
-  border-top-right-radius:10px;  /* round right */
+  background: #32CD32;   /* bright lime green */
+  flex: 1; 
+  border-top-right-radius: 10px;
 }
 
 
@@ -330,5 +337,6 @@ updateClock();
 </script>
 </body>
 </html>
+
 
 
