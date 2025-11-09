@@ -130,21 +130,25 @@ body {
 
 /* --- Date Banner Colors (3 stripes) --- */
 .date-banner .green { 
-  background: #E86699;   /* warm pink / rose */
+  /* LEFT — mauve */
+  background: #B784A7; 
   flex: 1; 
   border-top-left-radius: 10px;
 }
 
 .date-banner .red { 
-  background: #E28A3A;   /* warm soft orange */
+  /* MIDDLE — blue → mauve gradient */
+  background: linear-gradient(to right, #00B7FF, #B784A7);
   flex: 1;
 }
 
 .date-banner .blue { 
-  background: #00B7FF;   /* cyan-blue */
+  /* RIGHT — beige */
+  background: #D9C8A0; 
   flex: 1; 
   border-top-right-radius: 10px;
 }
+
 
 
 
@@ -332,6 +336,7 @@ updateClock();
 </script>
 </body>
 </html>
+
 
 
 
