@@ -111,40 +111,43 @@ body {
   overflow:visible;
 }
 
-.date-banner {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: var(--date-banner-height);
-  width: 100%;
-  overflow: hidden;
+/* ---------- DATE BANNER ---------- */
+.date-banner { 
+  position:relative; 
+  display:flex; 
+  align-items:center; 
+  justify-content:center; 
+  height: var(--date-banner-height); 
+  width:100%; 
+  overflow:hidden; 
 }
 
-/* FIX: This makes the stripes visible */
+/* ✅ FIXED: THIS MAKES THE 3 COLORS APPEAR */
 .date-banner .colors {
-  display: flex;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  overflow: hidden;
+  display:flex;
+  width:100%;
+  height:100%;
+  border-radius:10px;
+  overflow:hidden;
 }
 
+/* --- Date Banner Colors (3 stripes) --- */
 .date-banner .green { 
-  background: #2E2E2E;   /* dark gray */
+  background: #2E2E2E;   /* dark gray (left) */
   flex: 1; 
+  border-top-left-radius: 10px;
 }
 
 .date-banner .red { 
-  background: #9D6BFF;   /* purple */
+  background: #9D6BFF;   /* purple (middle) */
   flex: 1;
 }
 
 .date-banner .blue { 
-  background: #87CEEB;   /* sky blue */
+  background: #87CEEB;   /* sky blue (right) */
   flex: 1; 
+  border-top-right-radius: 10px;
 }
-
 
 .date-banner span {
   position:absolute;
@@ -156,7 +159,6 @@ body {
   animation:clock-bounce 2.8s ease-in-out infinite alternate;
 }
 
-/* ✅ Bounce left → right */
 @keyframes clock-bounce {
   0% { left:3%; transform:translateX(0); }
   100% { left:97%; transform:translateX(-100%); }
@@ -192,7 +194,7 @@ body {
   padding:10px;
   font-size:1.05rem;
   margin-top:10px;
-  border-radius:0 !important; 
+  border-radius:0 !important;
   overflow:visible;
 }
 
@@ -216,6 +218,7 @@ body {
 }
 .bottom-btn:hover { color:#0d47a1; }
 </style>
+
 </head>
 <body>
   <div class="ticket">
@@ -330,6 +333,7 @@ updateClock();
 </script>
 </body>
 </html>
+
 
 
 
