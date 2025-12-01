@@ -133,21 +133,23 @@ body {
 
 /* --- Date Banner Colors (3 stripes) --- */
 .date-banner .green { 
-  background: #2E2E2E;   /* dark gray (left) */
-  flex: 1; 
-  border-top-left-radius: 10px;
+  background: #2E2E2E;   /* left */
+  flex: 1;
+  border-bottom-left-radius: 10px;   /* ✅ bottom-left ONLY */
 }
 
 .date-banner .red { 
-  background: #9D6BFF;   /* purple (middle) */
+  background: #9D6BFF;   /* middle */
   flex: 1;
+  /* no rounded corners */
 }
 
 .date-banner .blue { 
-  background: #87CEEB;   /* sky blue (right) */
-  flex: 1; 
-  border-top-right-radius: 10px;
+  background: #87CEEB;   /* right */
+  flex: 1;
+  border-bottom-right-radius: 10px;   /* ✅ bottom-right ONLY */
 }
+
 
 .date-banner span {
   position:absolute;
@@ -333,6 +335,7 @@ updateClock();
 </script>
 </body>
 </html>
+
 
 
 
