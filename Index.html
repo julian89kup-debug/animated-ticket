@@ -122,14 +122,14 @@ body {
   overflow:hidden; 
 }
 
-/* ✅ FIXED: THIS MAKES THE 3 COLORS APPEAR */
 .date-banner .colors {
   display:flex;
   width:100%;
   height:100%;
-  border-radius:10px;
-  overflow:hidden;
+  overflow:hidden;   /* keep this */
+  border-radius:0;   /* IMPORTANT — remove the rounding */
 }
+
 /* --- Date Banner Colors (3 stripes) --- */
 
 /* LEFT stripe (olive green or whatever color you choose) */
@@ -346,6 +346,7 @@ updateClock();
 </script>
 </body>
 </html>
+
 
 
 
