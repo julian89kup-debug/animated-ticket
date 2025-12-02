@@ -131,22 +131,32 @@ body {
   overflow:hidden;
 }
 
-  /* --- Date Banner Colors (3 stripes) --- */
+/* --- Date Banner Colors (3 stripes) --- */
+
+/* LEFT — bright dark-lime green */
 .date-banner .green { 
-  background: #708238;   /* olive green */
-  flex: 1; 
+  background: #4CAF22;   /* bright warm lime-green */
+  flex: 1;
+
+  /* Shape: top rounded, bottom square */
   border-top-left-radius: 999px;
   border-bottom-left-radius: 0;
 }
 
+/* MIDDLE — your old yellow-green (moved from middle) */
 .date-banner .red { 
-  background: #26C6DA;   /* teal / turquoise blue */
+  background: #C8EF57;   /* warm yellow-green */
   flex: 1;
+
+  /* no round corners */
 }
 
-.date-banner .blue { 
-  background: #FF29C8;   /* bright magenta pink */
-  flex: 1; 
+/* RIGHT — bright magenta pink */
+.date-banner .blue  { 
+  background: #FF29C8;   /* vivid magenta-pink */
+  flex: 1;
+
+  /* Shape: top rounded, bottom square */
   border-top-right-radius: 999px;
   border-bottom-right-radius: 0;
 }
@@ -336,6 +346,7 @@ updateClock();
 </script>
 </body>
 </html>
+
 
 
 
