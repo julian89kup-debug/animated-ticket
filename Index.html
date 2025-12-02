@@ -130,35 +130,35 @@ body {
   border-radius:10px;
   overflow:hidden;
 }
-
 /* --- Date Banner Colors (3 stripes) --- */
 
-/* LEFT — bright dark-lime green */
+/* LEFT stripe (olive green or whatever color you choose) */
 .date-banner .green { 
-  background: #4CAF22;   /* bright warm lime-green */
+  background: #4CAF22;   /* example: dark lime green */
   flex: 1;
 
-  /* Shape: top rounded, bottom square */
-  border-top-left-radius: 999px;
-  border-bottom-left-radius: 0;
+  /* EXACT REAL TICKET SHAPE */
+  border-top-left-radius: 12px;   /* rounded */
+  border-bottom-left-radius: 0;   /* square */
 }
 
-/* MIDDLE — your old yellow-green (moved from middle) */
+/* MIDDLE stripe (teal / yellow-green, etc.) */
 .date-banner .red { 
-  background: #C8EF57;   /* warm yellow-green */
+  background: #26C6DA;   /* example: teal */
   flex: 1;
 
-  /* no round corners */
+  /* middle has NO rounded corners */
+  border-radius: 0;
 }
 
-/* RIGHT — bright magenta pink */
-.date-banner .blue  { 
-  background: #FF29C8;   /* vivid magenta-pink */
+/* RIGHT stripe (magenta pink, etc.) */
+.date-banner .blue { 
+  background: #FF29C8;   /* example: magenta pink */
   flex: 1;
 
-  /* Shape: top rounded, bottom square */
-  border-top-right-radius: 999px;
-  border-bottom-right-radius: 0;
+  /* EXACT REAL TICKET SHAPE */
+  border-top-right-radius: 12px;   /* rounded */
+  border-bottom-right-radius: 0;   /* square */
 }
 
 
@@ -346,6 +346,7 @@ updateClock();
 </script>
 </body>
 </html>
+
 
 
 
